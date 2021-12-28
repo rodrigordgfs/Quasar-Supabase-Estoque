@@ -1,10 +1,7 @@
 <template>
   <q-page padding>
     <p class="text-h6">
-      <q-form
-        class="row justify-center"
-        @submit.prevent="handleResetPassword"
-      >
+      <q-form class="row justify-center" @submit.prevent="handleResetPassword">
         <p class="col-12 text-h5 text-center">New Password</p>
         <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
           <q-input
@@ -26,35 +23,48 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
-import useAuthUser from 'src/composables/useAuthUser'
-import { useRouter, useRoute } from 'vue-router';
+import { defineComponent, ref } from "vue";
+import useAuthUser from "src/composables/useAuthUser";
+import { useRouter, useRoute } from "vue-router";
 
 export default defineComponent({
-  name: 'PageResetPassword',
+  name: "PageResetPassword",
 
-  setup () {
-    const router = useRouter()
-    const route = useRoute()
-    const { resetPassword } = useAuthUser()
-    const password = ref('')
-    const token = route.query.token
-
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+    const { resetPassword } = useAuthUser();
+    const password = ref("");
+    const token = route.query.token;
 
     const handleResetPassword = async () => {
       try {
-        await resetPassword(token, password.value)
-        router.push({ name: 'login' })
+        $q.loading.show({
+          message: "Saving new password ...",
+        });
+        await resetPassword(token, password.value);
+        $q.notify({
+          message: "Your password has been reset",
+          color: "positive",
+          icon: "check",
+        });
+        $q.loading.hide();
+        router.push({ name: "login" });
       } catch (error) {
-        console.log(error)
-        alert(error.message)
+        $q.loading.hide();
+        console.log(error);
+        $q.notify({
+          message: error.message,
+          color: "negative",
+          icon: "close",
+        });
       }
-    }
+    };
 
     return {
       password,
-      handleResetPassword
-    }
-  }
-})
+      handleResetPassword,
+    };
+  },
+});
 </script>
