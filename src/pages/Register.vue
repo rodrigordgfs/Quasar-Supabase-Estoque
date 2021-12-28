@@ -15,6 +15,7 @@
           <q-input
             label="Email"
             v-model="form.email"
+            type="email"
             outlined
           />
           <q-input
@@ -28,6 +29,13 @@
             color="primary"
             class="full-width"
             type="submit"
+          />
+          <q-btn
+            label="Back"
+            color="primary"
+            class="full-width"
+            flat
+            :to="{ name: 'login' }"
           />
         </div>
       </q-form>

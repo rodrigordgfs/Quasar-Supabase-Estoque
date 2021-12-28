@@ -3,41 +3,28 @@
     <p class="text-h6">
       <q-form
         class="row justify-center"
-        @submit.prevent="handleLogin"
+        @submit.prevent="handleResetPassword"
       >
-        <p class="col-12 text-h5 text-center">Login</p>
+        <p class="col-12 text-h5 text-center">Reset Password</p>
         <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
           <q-input
             label="Email"
-            v-model="form.email"
-            outlined
+            v-model="email"
             type="email"
-          />
-          <q-input
-            label="Password"
-            v-model="form.password"
-            type="password"
             outlined
           />
           <q-btn
-            label="Login"
+            label="Send Reset Email"
             color="primary"
             class="full-width"
             type="submit"
           />
           <q-btn
-            label="Register"
+            label="Back"
             color="primary"
             class="full-width"
-            :to="{ name: 'register' }"
             flat
-          />
-          <q-btn
-            label="Forgot your password?"
-            color="primary"
-            class="full-width"
-            :to="{ name: 'forgot-password' }"
-            flat
+            :to="{ name: 'login' }"
           />
         </div>
       </q-form>
@@ -51,20 +38,17 @@ import useAuthUser from 'src/composables/useAuthUser'
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
-  name: 'PageLogin',
+  name: 'PageForgotPassword',
 
   setup () {
     const router = useRouter()
-    const { login } = useAuthUser()
-    const form = ref({
-      email: '',
-      password: ''
-    })
+    const { sendPasswordResetEmail } = useAuthUser()
+    const email = ref('')
 
-    const handleLogin = async () => {
+    const handleResetPassword = async () => {
       try {
-        await login(form.value)
-        router.push({ name: 'me' })
+        await sendPasswordResetEmail(email.value)
+        alert(`Password reset email sent to ${email.value}`)
       } catch (error) {
         console.log(error)
         alert(error.message)
@@ -72,8 +56,8 @@ export default defineComponent({
     }
 
     return {
-      form,
-      handleLogin
+      email,
+      handleResetPassword
     }
   }
 })
