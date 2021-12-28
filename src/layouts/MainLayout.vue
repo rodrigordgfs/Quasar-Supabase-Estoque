@@ -15,7 +15,23 @@
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn-dropdown
+          color="white"
+          icon="person"
+          flat
+        >
+          <q-list>
+            <q-item
+              clickable
+              v-close-popup
+              @click="handleLogout"
+            >
+              <q-item-section>
+                <q-item-label>Logout</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
       </q-toolbar>
     </q-header>
 
@@ -95,6 +111,10 @@ const linksList = [
 
 import { defineComponent, ref } from 'vue'
 
+import useAuthUser from 'src/composables/useAuthUser'
+import { useRouter } from 'vue-router'
+import { useQuasar } from 'quasar'
+
 export default defineComponent({
   name: 'MainLayout',
 
@@ -105,12 +125,31 @@ export default defineComponent({
   setup () {
     const leftDrawerOpen = ref(false)
 
+    const { logout } = useAuthUser()
+
+    const router = useRouter()
+
+    const $q = useQuasar()
+
+    const handleLogout = async () => {
+      $q.dialog({
+        title: 'Logout',
+        message: 'Are you sure you want to logout?',
+        persistent: true,
+        cancel: true
+      }).onOk(async () => {
+        await logout()
+        router.replace({ name: 'login' })
+      })
+    }
+
     return {
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      },
+      handleLogout
     }
   }
 })
