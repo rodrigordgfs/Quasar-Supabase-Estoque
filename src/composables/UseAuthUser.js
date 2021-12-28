@@ -1,5 +1,5 @@
 import { ref} from "vue"
-import useSupabase from "@/boot/supabase"
+import useSupabase from "src/boot/supabase"
 
 const user = ref(null)
 
@@ -49,6 +49,7 @@ export default function useAuthUser () {
     }
 
     return {
+        user,
         login,
         loginWithSocialProvider,
         logout,
