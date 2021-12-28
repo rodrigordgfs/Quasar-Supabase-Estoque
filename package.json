@@ -6,7 +6,6 @@
   "author": "Rodrigo Viegas Rodrigues <rodrigoviegas@lojaspompeia.com.br>",
   "private": true,
   "scripts": {
-    "server": "quasar dev",
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },

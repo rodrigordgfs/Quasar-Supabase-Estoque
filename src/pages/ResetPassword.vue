@@ -24,7 +24,7 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import useAuthUser from "src/composables/useAuthUser";
+import useAuthUser from "../composables/useAuthUser";
 import { useRouter, useRoute } from "vue-router";
 
 export default defineComponent({

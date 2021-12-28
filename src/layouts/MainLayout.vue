@@ -111,7 +111,7 @@ const linksList = [
 
 import { defineComponent, ref } from 'vue'
 
-import useAuthUser from 'src/composables/useAuthUser'
+import useAuthUser from '../composables/useAuthUser'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 
