@@ -10,6 +10,7 @@
             color="primary"
             class="full-width"
             type="submit"
+            :rules="[(val) => (val && val.length > 0) || 'Email is required']"
           />
           <q-btn
             label="Back"
@@ -26,39 +27,29 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import useAuthUser from "../composables/useAuthUser";
-import { useRouter } from "vue-router";
-import { useQuasar } from "quasar";
+import useAuthUser from "src/composables/useAuthUser";
+import useNotify from "src/composables/useNotify";
+import useLoading from "src/composables/useLoading";
 
 export default defineComponent({
   name: "PageForgotPassword",
 
   setup() {
-    const router = useRouter();
     const { sendPasswordResetEmail } = useAuthUser();
+    const { notifyNegative, notifySuccess } = useNotify();
+    const { showLoading, hideLoading } = useLoading();
+
     const email = ref("");
-    const $q = useQuasar();
 
     const handleResetPassword = async () => {
       try {
-        $q.loading.show({
-          message: "Reseting password ...",
-        });
+        showLoading("Reseting password ...");
         await sendPasswordResetEmail(email.value);
-        $q.loading.hide();
-        $q.notify({
-          message: `Password reset email sent to ${email.value}`,
-          color: "positive",
-          icon: "check",
-        });
+        hideLoading();
+        notifySuccess(`Password reset email sent to ${email.value}`);
       } catch (error) {
-        $q.loading.hide();
-        console.log(error);
-        $q.notify({
-          message: error.message,
-          color: "negative",
-          icon: "close",
-        });
+        hideLoading();
+        notifyNegative(error.message);
       }
     };
 

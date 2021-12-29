@@ -4,12 +4,28 @@
       <q-form class="row justify-center" @submit.prevent="handleRegister">
         <p class="col-12 text-h5 text-center">Register</p>
         <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-          <q-input label="Name" v-model="form.name" outlined />
-          <q-input label="Email" v-model="form.email" type="email" outlined />
+          <q-input
+            label="Name"
+            v-model="form.name"
+            :rules="[(val) => (val && val.length > 0) || 'Name is required']"
+            outlined
+          />
+          <q-input
+            label="Email"
+            v-model="form.email"
+            type="email"
+            :rules="[(val) => (val && val.length > 0) || 'Email is required']"
+            outlined
+          />
           <q-input
             label="Password"
             v-model="form.password"
             type="password"
+            :rules="[
+              (val) =>
+                (val && val.length >= 6) ||
+                'Password must be at least 6 characters',
+            ]"
             outlined
           />
           <q-btn
@@ -33,9 +49,10 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import useAuthUser from "../composables/useAuthUser";
+import useAuthUser from "src/composables/useAuthUser";
 import { useRouter } from "vue-router";
-import { useQuasar } from "quasar";
+import useNotify from "src/composables/useNotify";
+import useLoading from "src/composables/useLoading";
 
 export default defineComponent({
   name: "PageRegister",
@@ -43,37 +60,28 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const { register } = useAuthUser();
+    const { notifyNegative, notifySuccess } = useNotify();
+    const { showLoading, hideLoading } = useLoading();
+
     const form = ref({
       name: "",
       email: "",
       password: "",
     });
-    const $q = useQuasar();
 
     const handleRegister = async () => {
       try {
-        $q.loading.show({
-          message: "Creating new account ...",
-        });
+        showLoading("Creating new account ...");
         await register(form.value);
-        $q.loading.hide();
-        $q.notify({
-          message: "Your account has been created",
-          color: "positive",
-          icon: "check",
-        });
+        hideLoading();
+        notifySuccess("Your account has been created");
         router.push({
           name: "email-confirmation",
           query: { email: form.value.email },
         });
       } catch (error) {
-        $q.loading.hide();
-        console.log(error);
-        $q.notify({
-          message: error.message,
-          color: "negative",
-          icon: "close",
-        });
+        hideLoading();
+        notifyNegative(error.message);
       }
     };
 

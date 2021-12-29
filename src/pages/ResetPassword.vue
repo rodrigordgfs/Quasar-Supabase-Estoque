@@ -8,6 +8,11 @@
             label="New Password"
             v-model="password"
             type="password"
+            :rules="[
+              (val) =>
+                (val && val.length >= 6) ||
+                'Password must be at least 6 characters',
+            ]"
             outlined
           />
           <q-btn
@@ -24,8 +29,10 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import useAuthUser from "../composables/useAuthUser";
+import useAuthUser from "src/composables/useAuthUser";
 import { useRouter, useRoute } from "vue-router";
+import useNotify from "src/composables/useNotify";
+import useLoading from "src/composables/useLoading";
 
 export default defineComponent({
   name: "PageResetPassword",
@@ -34,30 +41,22 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
     const { resetPassword } = useAuthUser();
+    const { notifyNegative, notifySuccess } = useNotify();
+    const { showLoading, hideLoading } = useLoading();
+
     const password = ref("");
     const token = route.query.token;
 
     const handleResetPassword = async () => {
       try {
-        $q.loading.show({
-          message: "Saving new password ...",
-        });
+        showLoading("Saving new password ...");
         await resetPassword(token, password.value);
-        $q.notify({
-          message: "Your password has been reset",
-          color: "positive",
-          icon: "check",
-        });
-        $q.loading.hide();
+        notifySuccess("Your password has been reset");
+        hideLoading();
         router.push({ name: "login" });
       } catch (error) {
-        $q.loading.hide();
-        console.log(error);
-        $q.notify({
-          message: error.message,
-          color: "negative",
-          icon: "close",
-        });
+        hideLoading();
+        notifyNegative(error.message);
       }
     };
 
