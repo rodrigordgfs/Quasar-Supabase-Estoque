@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import useAuthUser from "src/composables/useAuthUser";
 import useNotify from "src/composables/useNotify";
 import useLoading from "src/composables/useLoading";
@@ -62,7 +62,7 @@ export default defineComponent({
 
   setup() {
     const router = useRouter();
-    const { login } = useAuthUser();
+    const { login, isLoggedIn } = useAuthUser();
     const { notifyNegative, notifySuccess } = useNotify();
     const { showLoading, hideLoading } = useLoading();
 
@@ -70,6 +70,10 @@ export default defineComponent({
       email: "",
       password: "",
     });
+
+    onMounted(async () => {
+      if (await isLoggedIn()) router.push({ name: "me" })
+    })
 
     const handleLogin = async () => {
       try {
