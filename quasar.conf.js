@@ -53,7 +53,7 @@ module.exports = configure(function (ctx) {
         SUPABASE_URL: "https://egnbxopkpsqmbvvtoxod.supabase.co"
       },
       // transpile: false,
-      // publicPath: '/',
+      publicPath: '/',
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
@@ -63,7 +63,7 @@ module.exports = configure(function (ctx) {
       // rtl: true, // https://quasar.dev/options/rtl-support
       // preloadChunks: true,
       // showProgress: false,
-      // gzip: true,
+      gzip: true,
       // analyze: true,
 
       // Options below are automatically set depending on the env, set them if you want to override
@@ -168,7 +168,7 @@ module.exports = configure(function (ctx) {
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#24b27d',
         icons: [
           {
             src: 'icons/icon-128x128.png',
