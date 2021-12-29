@@ -79,12 +79,12 @@ export default defineComponent({
       try {
         showLoading("Recovering account data ...");
         await login(form.value);
-        hideLoading();
         notifySuccess("Login successful!");
         router.push({ name: "me" });
       } catch (error) {
-        hideLoading();
         notifyNegative(error.message);
+      } finally {
+        hideLoading();
       }
     };
 

@@ -52,11 +52,11 @@ export default defineComponent({
         showLoading("Saving new password ...");
         await resetPassword(token, password.value);
         notifySuccess("Your password has been reset");
-        hideLoading();
         router.push({ name: "login" });
       } catch (error) {
-        hideLoading();
         notifyNegative(error.message);
+      } finally {
+        hideLoading();
       }
     };
 

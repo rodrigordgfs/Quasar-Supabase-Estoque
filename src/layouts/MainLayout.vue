@@ -11,7 +11,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title>Quasar Supabase Estoque</q-toolbar-title>
 
         <q-btn-dropdown color="white" icon="person" flat>
           <q-list>
@@ -96,6 +96,8 @@ import { defineComponent, ref } from "vue";
 import useAuthUser from "src/composables/useAuthUser";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
+import useNotify from 'src/composables/useNotify';
+import useLoading from 'src/composables/useLoading';
 
 export default defineComponent({
   name: "MainLayout",
@@ -106,12 +108,11 @@ export default defineComponent({
 
   setup() {
     const leftDrawerOpen = ref(false);
-
     const { logout } = useAuthUser();
-
     const router = useRouter();
-
     const $q = useQuasar();
+    const { notifyNegative } = useNotify();
+    const { showLoading, hideLoading } = useLoading();
 
     const handleLogout = async () => {
       $q.dialog({
@@ -120,8 +121,15 @@ export default defineComponent({
         persistent: true,
         cancel: true,
       }).onOk(async () => {
-        await logout();
-        router.replace({ name: "login" });
+        try {
+          showLoading("Logging out ...");
+          await logout();
+          router.replace({ name: "login" });
+        } catch (error) {
+          notifyNegative(error.message);
+        } finally {
+          hideLoading();
+        }
       });
     };
 

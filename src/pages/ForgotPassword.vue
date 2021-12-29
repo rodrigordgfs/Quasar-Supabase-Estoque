@@ -45,11 +45,11 @@ export default defineComponent({
       try {
         showLoading("Reseting password ...");
         await sendPasswordResetEmail(email.value);
-        hideLoading();
         notifySuccess(`Password reset email sent to ${email.value}`);
       } catch (error) {
-        hideLoading();
         notifyNegative(error.message);
+      } finally {
+        hideLoading();
       }
     };
 

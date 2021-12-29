@@ -73,15 +73,15 @@ export default defineComponent({
       try {
         showLoading("Creating new account ...");
         await register(form.value);
-        hideLoading();
         notifySuccess("Your account has been created");
         router.push({
           name: "email-confirmation",
           query: { email: form.value.email },
         });
       } catch (error) {
-        hideLoading();
         notifyNegative(error.message);
+      } finally {
+        hideLoading();
       }
     };
 
