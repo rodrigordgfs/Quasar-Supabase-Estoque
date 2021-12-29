@@ -51,11 +51,11 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from "vue";
-import useAuthUser from "src/composables/useAuthUser";
-import useNotify from "src/composables/useNotify";
-import useLoading from "src/composables/useLoading";
-import { useRouter } from "vue-router";
+import { defineComponent, ref, onMounted } from 'vue';
+import useAuthUser from 'src/composables/useAuthUser';
+import useNotify from 'src/composables/useNotify';
+import useLoading from 'src/composables/useLoading';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: "PageLogin",

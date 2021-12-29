@@ -26,10 +26,10 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-import useAuthUser from "src/composables/useAuthUser";
-import useNotify from "src/composables/useNotify";
-import useLoading from "src/composables/useLoading";
+import { defineComponent, ref } from 'vue';
+import useAuthUser from 'src/composables/useAuthUser';
+import useNotify from 'src/composables/useNotify';
+import useLoading from 'src/composables/useLoading';
 
 export default defineComponent({
   name: "PageForgotPassword",

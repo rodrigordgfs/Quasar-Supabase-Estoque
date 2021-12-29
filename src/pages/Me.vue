@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import useAuthUser from "src/composables/useAuthUser";
+import { defineComponent } from 'vue';
+import useAuthUser from 'src/composables/useAuthUser';
 
 export default defineComponent({
   name: "PageMe",
