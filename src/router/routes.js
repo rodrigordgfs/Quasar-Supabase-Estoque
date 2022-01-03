@@ -9,32 +9,32 @@ const routes = [
       {
         path: "",
         name: "loginDefault",
-        component: () => import("pages/Login.vue"),
+        component: () => import("pages/Login"),
       },
       {
         path: "login",
         name: "login",
-        component: () => import("pages/Login.vue"),
+        component: () => import("pages/Login"),
       },
       {
         path: "register",
         name: "register",
-        component: () => import("pages/Register.vue"),
+        component: () => import("pages/Register"),
       },
       {
         path: "email-confirmation",
         name: "email-confirmation",
-        component: () => import("pages/EmailConfirmation.vue"),
+        component: () => import("pages/EmailConfirmation"),
       },
       {
         path: "forgot-password",
         name: "forgot-password",
-        component: () => import("pages/ForgotPassword.vue"),
+        component: () => import("pages/ForgotPassword"),
       },
       {
         path: "reset-password",
         name: "reset-password",
-        component: () => import("pages/ResetPassword.vue"),
+        component: () => import("pages/ResetPassword"),
       },
     ],
   },
@@ -45,7 +45,12 @@ const routes = [
       requireAuth: true,
     },
     children: [
-      { path: "me", name: "me", component: () => import("pages/Me.vue") },
+      { path: "home", name: "home", component: () => import("pages/Home") },
+      {
+        path: "category",
+        name: "category",
+        component: () => import("pages/category"),
+      },
     ],
   },
 
@@ -53,7 +58,7 @@ const routes = [
   // but you can also remove it
   {
     path: "/:catchAll(.*)*",
-    component: () => import("pages/Error404.vue"),
+    component: () => import("pages/Error404"),
   },
 ];
 

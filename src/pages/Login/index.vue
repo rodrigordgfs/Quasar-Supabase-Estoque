@@ -72,7 +72,7 @@ export default defineComponent({
     });
 
     onMounted(async () => {
-      if (await isLoggedIn()) router.push({ name: "me" })
+      if (await isLoggedIn()) router.push({ name: "home" })
     })
 
     const handleLogin = async () => {
@@ -80,7 +80,7 @@ export default defineComponent({
         showLoading("Recovering account data ...");
         await login(form.value);
         notifySuccess("Login successful!");
-        router.push({ name: "me" });
+        router.push({ name: "home" });
       } catch (error) {
         notifyNegative(error.message);
       } finally {
