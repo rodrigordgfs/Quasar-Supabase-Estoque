@@ -11,7 +11,7 @@
         <template v-slot:top>
           <span class="text-h6"> Categories </span>
           <q-space />
-          <q-btn label="Add new Category" color="primary" />
+          <q-btn label="Add new Category" color="primary" icon="add" dense />
         </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props" class="q-gutter-x-sm">
