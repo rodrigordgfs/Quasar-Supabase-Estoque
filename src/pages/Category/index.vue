@@ -6,6 +6,7 @@
         :rows="categories"
         :columns="columns"
         row-key="id"
+        :loading="loading"
       >
         <template v-slot:top>
           <span class="text-h6"> Categories </span>
@@ -28,26 +29,16 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
+import useAPI from "src/composables/useAPI";
+import useNotify from "src/composables/useNotify";
+import useLoading from "src/composables/useLoading";
 
 export default defineComponent({
   name: "PageCategory",
 
   setup() {
-    const categories = [
-      {
-        id: 1,
-        name: "Category 1",
-      },
-      {
-        id: 2,
-        name: "Category 2",
-      },
-      {
-        id: 3,
-        name: "Category 3",
-      },
-    ];
+    const categories = ref([]);
     const columns = [
       {
         name: "name",
@@ -63,10 +54,32 @@ export default defineComponent({
         field: "actions",
       },
     ];
+    const { get } = useAPI();
+    const { showLoading, hideLoading } = useLoading();
+    const { notifyNegative } = useNotify();
+    const loading = ref(true);
+
+    const handleGetCategories = async () => {
+      loading.value = true;
+      try {
+        showLoading("Getting categories...");
+        categories.value = await get("category");
+      } catch (error) {
+        notifyNegative(error.message);
+      } finally {
+        loading.value = false;
+        hideLoading();
+      }
+    };
+
+    onMounted(() => {
+      handleGetCategories();
+    });
 
     return {
       categories,
       columns,
+      loading,
     };
   },
 });
