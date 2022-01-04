@@ -29,7 +29,14 @@
       <q-list>
         <q-item-label header>Menu</q-item-label>
 
-        <MenuList v-for="link in menuList" :key="link.title" v-bind="link" />
+        <MenuList
+          v-for="route in routes"
+          :key="route.path"
+          :routeName="route.name"
+          :title="route.meta.label"
+          :caption="route.meta.subtitle"
+          :icon="route.meta.icon"
+        />
       </q-list>
     </q-drawer>
 
@@ -40,25 +47,8 @@
 </template>
 
 <script>
-import MenuList from "src/components/MenuList.vue";
-
-const menuList = [
-  {
-    title: "Home",
-    caption: "Welcome",
-    icon: "home",
-    routeName: "home",
-  },
-  {
-    title: "Category",
-    caption: "Show categories",
-    icon: "list",
-    routeName: "category",
-  },
-];
-
 import { defineComponent, ref, computed } from "vue";
-
+import MenuList from "src/components/MenuList.vue";
 import useAuthUser from "src/composables/useAuthUser";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
@@ -80,6 +70,9 @@ export default defineComponent({
     const { notifyNegative } = useNotify();
     const { showLoading, hideLoading } = useLoading();
     const title = computed(() => router.currentRoute?.value?.meta?.label);
+    const routes = computed(() =>
+      router.options.routes[1].children.filter((item) => !item.meta.hidden)
+    );
 
     const handleLogout = async () => {
       $q.dialog({
@@ -101,13 +94,13 @@ export default defineComponent({
     };
 
     return {
-      menuList,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
       handleLogout,
       title,
+      routes,
     };
   },
 });

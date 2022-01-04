@@ -69,6 +69,8 @@ const routes = [
         component: () => import("pages/Home"),
         meta: {
           label: "Home",
+          subtitle: "Welcome",
+          icon: "home",
         },
       },
       {
@@ -77,6 +79,8 @@ const routes = [
         component: () => import("pages/Category"),
         meta: {
           label: "Category",
+          subtitle: "Show categories",
+          icon: "list",
         },
       },
       {
@@ -85,6 +89,7 @@ const routes = [
         component: () => import("pages/FormCategory"),
         meta: {
           label: "Form Category",
+          hidden: true,
         },
       },
     ],
