@@ -34,9 +34,9 @@
 <script>
 import { defineComponent, ref, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import useAPI from "../../composables/useAPI";
-import useNotify from "../../composables/useNotify";
-import useLoading from "../../composables/useLoading";
+import useAPI from "src/composables/useAPI";
+import useNotify from "src/composables/useNotify";
+import useLoading from "src/composables/useLoading";
 
 export default defineComponent({
   name: "PageFormCategory",
