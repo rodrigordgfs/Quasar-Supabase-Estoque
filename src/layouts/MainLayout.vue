@@ -49,11 +49,11 @@
 <script>
 import { defineComponent, ref, computed } from "vue";
 import MenuList from "src/components/MenuList.vue";
-import useAuthUser from "src/composables/useAuthUser";
+import useAuthUser from "src/composables/UseAuthUser";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
-import useNotify from "src/composables/useNotify";
-import useLoading from "src/composables/useLoading";
+import useNotify from "src/composables/UseNotify";
+import useLoading from "src/composables/UseLoading";
 
 export default defineComponent({
   name: "MainLayout",

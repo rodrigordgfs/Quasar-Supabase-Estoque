@@ -52,9 +52,9 @@
 
 <script>
 import { defineComponent, ref, onMounted } from "vue";
-import useAuthUser from "src/composables/useAuthUser";
-import useNotify from "src/composables/useNotify";
-import useLoading from "src/composables/useLoading";
+import useAuthUser from "src/composables/UseAuthUser";
+import useNotify from "src/composables/UseNotify";
+import useLoading from "src/composables/UseLoading";
 import { useRouter } from "vue-router";
 
 export default defineComponent({

@@ -30,10 +30,10 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import useAuthUser from "src/composables/useAuthUser";
+import useAuthUser from "src/composables/UseAuthUser";
 import { useRouter, useRoute } from "vue-router";
-import useNotify from "src/composables/useNotify";
-import useLoading from "src/composables/useLoading";
+import useNotify from "src/composables/UseNotify";
+import useLoading from "src/composables/UseLoading";
 
 export default defineComponent({
   name: "PageResetPassword",

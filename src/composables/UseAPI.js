@@ -1,5 +1,5 @@
 import useSupabase from "src/boot/supabase";
-import useAuthUser from "./useAuthUser";
+import useAuthUser from "./UseAuthUser";
 
 export default function useAPI() {
   const { supabase } = useSupabase();
