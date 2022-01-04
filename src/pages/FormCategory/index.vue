@@ -63,7 +63,7 @@ export default defineComponent({
           await post(table, form.value);
           notifySuccess("Category saved successfully");
         }
-        router.push({ name: "category" });
+        router.push({ name: "Category" });
       } catch (error) {
         notifyNegative(error.message);
       } finally {

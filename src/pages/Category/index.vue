@@ -92,9 +92,9 @@ export default defineComponent({
     };
 
     const handleEdit = (category) =>
-      router.push({ name: "form-category", params: { id: category.id } });
+      router.push({ name: "Form Category", params: { id: category.id } });
 
-    const handleAdd = () => router.push({ name: "form-category" });
+    const handleAdd = () => router.push({ name: "Form Category" });
 
     const handleRemove = async (id) => {
       try {

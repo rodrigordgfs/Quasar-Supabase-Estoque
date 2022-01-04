@@ -26,15 +26,15 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach(async (to, from, next) => {
     const { isLoggedIn } = useAuthUser();
 
-    if (to.hash.includes("type=recovery") && to.name !== "reset-password") {
+    if (to.hash.includes("type=recovery") && to.name !== "Reset Password") {
       const token = to.hash.split("&")[0].replace("#access_token=", "");
-      next({ name: "reset-password", query: { token } });
+      next({ name: "Reset Password", query: { token } });
     }
 
     if (!to.meta.requireAuth || (await isLoggedIn())) {
       next();
     } else {
-      next({ name: "login" });
+      next({ name: "Login" });
     }
   });
 

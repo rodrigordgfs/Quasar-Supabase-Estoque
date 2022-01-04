@@ -34,14 +34,14 @@
             label="Register"
             color="primary"
             class="full-width"
-            :to="{ name: 'register' }"
+            :to="{ name: 'Register' }"
             flat
           />
           <q-btn
             label="Forgot your password?"
             color="primary"
             class="full-width"
-            :to="{ name: 'forgot-password' }"
+            :to="{ name: 'Forgot Password' }"
             flat
           />
         </div>
@@ -51,11 +51,11 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from 'vue';
-import useAuthUser from 'src/composables/useAuthUser';
-import useNotify from 'src/composables/useNotify';
-import useLoading from 'src/composables/useLoading';
-import { useRouter } from 'vue-router';
+import { defineComponent, ref, onMounted } from "vue";
+import useAuthUser from "src/composables/useAuthUser";
+import useNotify from "src/composables/useNotify";
+import useLoading from "src/composables/useLoading";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "PageLogin",
@@ -72,15 +72,15 @@ export default defineComponent({
     });
 
     onMounted(async () => {
-      if (await isLoggedIn()) router.push({ name: "home" })
-    })
+      if (await isLoggedIn()) router.push({ name: "Home" });
+    });
 
     const handleLogin = async () => {
       try {
         showLoading("Recovering account data ...");
         await login(form.value);
         notifySuccess("Login successful!");
-        router.push({ name: "home" });
+        router.push({ name: "Home" });
       } catch (error) {
         notifyNegative(error.message);
       } finally {

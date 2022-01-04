@@ -12,7 +12,7 @@
           color="secondary"
           class="full-width"
           rounded
-          :to="{ name: 'login' }"
+          :to="{ name: 'Login' }"
         />
       </div>
     </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "PageEmailConfirmation",

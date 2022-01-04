@@ -42,7 +42,7 @@
             color="primary"
             class="full-width"
             flat
-            :to="{ name: 'login' }"
+            :to="{ name: 'Login' }"
           />
         </div>
       </q-form>
@@ -78,7 +78,7 @@ export default defineComponent({
         await register(form.value);
         notifySuccess("Your account has been created");
         router.push({
-          name: "email-confirmation",
+          name: "Email Confirmation",
           query: { email: form.value.email },
         });
       } catch (error) {

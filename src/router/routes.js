@@ -13,27 +13,27 @@ const routes = [
       },
       {
         path: "login",
-        name: "login",
+        name: "Login",
         component: () => import("pages/Login"),
       },
       {
         path: "register",
-        name: "register",
+        name: "Register",
         component: () => import("pages/Register"),
       },
       {
         path: "email-confirmation",
-        name: "email-confirmation",
+        name: "Email Confirmation",
         component: () => import("pages/EmailConfirmation"),
       },
       {
         path: "forgot-password",
-        name: "forgot-password",
+        name: "Forgot Password",
         component: () => import("pages/ForgotPassword"),
       },
       {
         path: "reset-password",
-        name: "reset-password",
+        name: "Reset Password",
         component: () => import("pages/ResetPassword"),
       },
     ],
@@ -45,15 +45,15 @@ const routes = [
       requireAuth: true,
     },
     children: [
-      { path: "home", name: "home", component: () => import("pages/Home") },
+      { path: "me", name: "Home", component: () => import("pages/Home") },
       {
         path: "category",
-        name: "category",
+        name: "Category",
         component: () => import("pages/Category"),
       },
       {
         path: "form-category/:id?",
-        name: "form-category",
+        name: "Form Category",
         component: () => import("pages/FormCategory"),
       },
     ],
