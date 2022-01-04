@@ -11,11 +11,22 @@
         <template v-slot:top>
           <span class="text-h6"> Categories </span>
           <q-space />
-          <q-btn label="Add new Category" color="primary" icon="add" dense />
+          <q-btn
+            label="Add new Category"
+            color="primary"
+            icon="add"
+            @click="handleAdd"
+            dense
+          />
         </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props" class="q-gutter-x-sm">
-            <q-btn icon="edit" color="info" dense>
+            <q-btn
+              icon="edit"
+              color="info"
+              @click="handleEdit(props.row)"
+              dense
+            >
               <q-tooltip> Edit </q-tooltip>
             </q-btn>
             <q-btn icon="delete" color="negative" dense>
@@ -30,14 +41,15 @@
 
 <script>
 import { defineComponent, ref, onMounted } from "vue";
-import useAPI from "src/composables/useAPI";
 import useNotify from "src/composables/useNotify";
-import useLoading from "src/composables/useLoading";
+import useAPI from "src/composables/useAPI";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "PageCategory",
 
   setup() {
+    const router = useRouter();
     const categories = ref([]);
     const columns = [
       {
@@ -55,21 +67,26 @@ export default defineComponent({
       },
     ];
     const { get } = useAPI();
-    const { showLoading, hideLoading } = useLoading();
     const { notifyNegative } = useNotify();
     const loading = ref(true);
 
     const handleGetCategories = async () => {
       loading.value = true;
       try {
-        showLoading("Getting categories...");
         categories.value = await get("category");
       } catch (error) {
         notifyNegative(error.message);
       } finally {
         loading.value = false;
-        hideLoading();
       }
+    };
+
+    const handleEdit = (category) => {
+      router.push({ name: "form-category", params: { id: category.id } });
+    };
+
+    const handleAdd = () => {
+      router.push({ name: "form-category" });
     };
 
     onMounted(() => {
@@ -80,6 +97,8 @@ export default defineComponent({
       categories,
       columns,
       loading,
+      handleEdit,
+      handleAdd,
     };
   },
 });

@@ -11,6 +11,7 @@
             class="full-width"
             type="submit"
             :rules="[(val) => (val && val.length > 0) || 'Email is required']"
+            lazy-rules
           />
           <q-btn
             label="Back"
@@ -26,10 +27,10 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
-import useAuthUser from 'src/composables/useAuthUser';
-import useNotify from 'src/composables/useNotify';
-import useLoading from 'src/composables/useLoading';
+import { defineComponent, ref } from "vue";
+import useAuthUser from "src/composables/useAuthUser";
+import useNotify from "src/composables/useNotify";
+import useLoading from "src/composables/useLoading";
 
 export default defineComponent({
   name: "PageForgotPassword",

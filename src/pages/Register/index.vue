@@ -9,6 +9,7 @@
             v-model="form.name"
             :rules="[(val) => (val && val.length > 0) || 'Name is required']"
             outlined
+            lazy-rules
           />
           <q-input
             label="Email"
@@ -16,6 +17,7 @@
             type="email"
             :rules="[(val) => (val && val.length > 0) || 'Email is required']"
             outlined
+            lazy-rules
           />
           <q-input
             label="Password"
@@ -27,6 +29,7 @@
                 'Password must be at least 6 characters',
             ]"
             outlined
+            lazy-rules
           />
           <q-btn
             label="Register"
@@ -48,11 +51,11 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
-import useAuthUser from 'src/composables/useAuthUser';
-import { useRouter } from 'vue-router';
-import useNotify from 'src/composables/useNotify';
-import useLoading from 'src/composables/useLoading';
+import { defineComponent, ref } from "vue";
+import useAuthUser from "src/composables/useAuthUser";
+import { useRouter } from "vue-router";
+import useNotify from "src/composables/useNotify";
+import useLoading from "src/composables/useLoading";
 
 export default defineComponent({
   name: "PageRegister",

@@ -49,7 +49,12 @@ const routes = [
       {
         path: "category",
         name: "category",
-        component: () => import("pages/category"),
+        component: () => import("pages/Category"),
+      },
+      {
+        path: "form-category/:id?",
+        name: "form-category",
+        component: () => import("pages/FormCategory"),
       },
     ],
   },
