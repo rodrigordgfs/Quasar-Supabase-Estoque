@@ -28,6 +28,7 @@ const routes = [
         component: () => import("pages/Register"),
         meta: {
           label: "Register",
+          back: true,
         },
       },
       {
@@ -44,6 +45,7 @@ const routes = [
         component: () => import("pages/ForgotPassword"),
         meta: {
           label: "Forgot Password",
+          back: true,
         },
       },
       {
@@ -81,6 +83,7 @@ const routes = [
           label: "Category",
           subtitle: "Show categories",
           icon: "list",
+          back: true,
         },
       },
       {
@@ -90,6 +93,7 @@ const routes = [
         meta: {
           label: "Form Category",
           hidden: true,
+          back: true,
         },
       },
     ],

@@ -13,13 +13,6 @@
             :rules="[(val) => (val && val.length > 0) || 'Email is required']"
             lazy-rules
           />
-          <q-btn
-            label="Back"
-            color="primary"
-            class="full-width"
-            flat
-            :to="{ name: 'login' }"
-          />
         </div>
       </q-form>
     </p>

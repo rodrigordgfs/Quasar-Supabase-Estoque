@@ -11,6 +11,16 @@
           @click="toggleLeftDrawer"
         />
 
+        <q-btn
+          v-if="showBack"
+          icon="navigate_before"
+          color="white"
+          @click="goBack"
+          dense
+          round
+          flat
+        />
+
         <q-toolbar-title>{{ title }}</q-toolbar-title>
 
         <q-btn-dropdown color="white" icon="person" flat>
@@ -70,6 +80,7 @@ export default defineComponent({
     const { notifyNegative } = useNotify();
     const { showLoading, hideLoading } = useLoading();
     const title = computed(() => router.currentRoute?.value?.meta?.label);
+    const showBack = computed(() => router.currentRoute?.value?.meta?.back);
     const routes = computed(() =>
       router.options.routes[1].children.filter((item) => !item.meta.hidden)
     );
@@ -93,6 +104,10 @@ export default defineComponent({
       });
     };
 
+    const goBack = () => {
+      router.go(-1);
+    };
+
     return {
       leftDrawerOpen,
       toggleLeftDrawer() {
@@ -101,6 +116,8 @@ export default defineComponent({
       handleLogout,
       title,
       routes,
+      showBack,
+      goBack,
     };
   },
 });

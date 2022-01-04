@@ -37,13 +37,6 @@
             class="full-width"
             type="submit"
           />
-          <q-btn
-            label="Back"
-            color="primary"
-            class="full-width"
-            flat
-            :to="{ name: 'Login' }"
-          />
         </div>
       </q-form>
     </p>
