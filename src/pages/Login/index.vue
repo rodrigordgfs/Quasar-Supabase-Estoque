@@ -34,14 +34,14 @@
             label="Register"
             color="primary"
             class="full-width"
-            :to="{ name: 'Register' }"
+            :to="{ name: 'register' }"
             flat
           />
           <q-btn
             label="Forgot your password?"
             color="primary"
             class="full-width"
-            :to="{ name: 'Forgot Password' }"
+            :to="{ name: 'forgot-password' }"
             flat
           />
         </div>
@@ -72,7 +72,7 @@ export default defineComponent({
     });
 
     onMounted(async () => {
-      if (await isLoggedIn()) router.push({ name: "Home" });
+      if (await isLoggedIn()) router.push({ name: "home" });
     });
 
     const handleLogin = async () => {
@@ -80,7 +80,7 @@ export default defineComponent({
         showLoading("Recovering account data ...");
         await login(form.value);
         notifySuccess("Login successful!");
-        router.push({ name: "Home" });
+        router.push({ name: "home" });
       } catch (error) {
         notifyNegative(error.message);
       } finally {

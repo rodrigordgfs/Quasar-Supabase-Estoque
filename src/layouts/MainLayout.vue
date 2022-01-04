@@ -11,12 +11,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          <div class="col">
-            <div>Quasar Supabase Estoque</div>
-            <div class="text-caption">{{ subtitle }}</div>
-          </div>
-        </q-toolbar-title>
+        <q-toolbar-title>{{ title }}</q-toolbar-title>
 
         <q-btn-dropdown color="white" icon="person" flat>
           <q-list>
@@ -52,17 +47,17 @@ const menuList = [
     title: "Home",
     caption: "Welcome",
     icon: "home",
-    routeName: "Home",
+    routeName: "home",
   },
   {
     title: "Category",
     caption: "Show categories",
     icon: "list",
-    routeName: "Category",
+    routeName: "category",
   },
 ];
 
-import { defineComponent, ref, computed, watch } from "vue";
+import { defineComponent, ref, computed } from "vue";
 
 import useAuthUser from "src/composables/useAuthUser";
 import { useRouter } from "vue-router";
@@ -84,7 +79,7 @@ export default defineComponent({
     const $q = useQuasar();
     const { notifyNegative } = useNotify();
     const { showLoading, hideLoading } = useLoading();
-    const subtitle = computed(() => router.currentRoute?.value?.name);
+    const title = computed(() => router.currentRoute?.value?.meta?.label);
 
     const handleLogout = async () => {
       $q.dialog({
@@ -96,7 +91,7 @@ export default defineComponent({
         try {
           showLoading("Logging out ...");
           await logout();
-          router.replace({ name: "Login" });
+          router.replace({ name: "login" });
         } catch (error) {
           notifyNegative(error.message);
         } finally {
@@ -112,7 +107,7 @@ export default defineComponent({
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
       handleLogout,
-      subtitle,
+      title,
     };
   },
 });

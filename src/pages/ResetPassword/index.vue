@@ -53,7 +53,7 @@ export default defineComponent({
         showLoading("Saving new password ...");
         await resetPassword(token, password.value);
         notifySuccess("Your password has been reset");
-        router.push({ name: "Login" });
+        router.push({ name: "login" });
       } catch (error) {
         notifyNegative(error.message);
       } finally {

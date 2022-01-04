@@ -1,9 +1,10 @@
 import { ref } from "vue";
 import useSupabase from "src/boot/supabase";
 
+const user = ref(null);
+
 export default function useAuthUser() {
   const { supabase } = useSupabase();
-  const user = ref(null);
 
   const login = async ({ email, password }) => {
     const { user, error } = await supabase.auth.signIn({ email, password });

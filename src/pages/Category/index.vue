@@ -12,6 +12,7 @@
           <span class="text-h6"> Categories </span>
           <q-space />
           <q-btn
+            v-if="$q.platform.is.desktop"
             label="Add new Category"
             color="primary"
             icon="add"
@@ -41,6 +42,15 @@
         </template>
       </q-table>
     </div>
+    <q-page-sticky
+      v-if="$q.platform.is.mobile"
+      position="bottom-right"
+      :offset="[18, 18]"
+    >
+      <q-btn icon="add" color="primary" @click="handleAdd" dense fab>
+        <q-tooltip>Add new category</q-tooltip>
+      </q-btn>
+    </q-page-sticky>
   </q-page>
 </template>
 
@@ -92,9 +102,9 @@ export default defineComponent({
     };
 
     const handleEdit = (category) =>
-      router.push({ name: "Form Category", params: { id: category.id } });
+      router.push({ name: "form-category", params: { id: category.id } });
 
-    const handleAdd = () => router.push({ name: "Form Category" });
+    const handleAdd = () => router.push({ name: "form-category" });
 
     const handleRemove = async (id) => {
       try {

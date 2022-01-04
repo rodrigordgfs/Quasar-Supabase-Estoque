@@ -1,10 +1,5 @@
 <template>
   <q-page padding>
-    <div class="row justify-center">
-      <div class="col-12 text-center">
-        <p class="text-h6">Form Category</p>
-      </div>
-    </div>
     <q-form
       class="col-md-7 col-sm-12 col-xs-12 q-gutter-y-sm"
       @submit.prevent="handleSave"
@@ -63,7 +58,7 @@ export default defineComponent({
           await post(table, form.value);
           notifySuccess("Category saved successfully");
         }
-        router.push({ name: "Category" });
+        router.push({ name: "category" });
       } catch (error) {
         notifyNegative(error.message);
       } finally {

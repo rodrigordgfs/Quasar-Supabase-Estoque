@@ -18,7 +18,7 @@
             color="primary"
             class="full-width"
             flat
-            :to="{ name: 'Login' }"
+            :to="{ name: 'login' }"
           />
         </div>
       </q-form>

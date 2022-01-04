@@ -10,31 +10,49 @@ const routes = [
         path: "",
         name: "loginDefault",
         component: () => import("pages/Login"),
+        meta: {
+          label: "Login",
+        },
       },
       {
         path: "login",
-        name: "Login",
+        name: "login",
         component: () => import("pages/Login"),
+        meta: {
+          label: "Login",
+        },
       },
       {
         path: "register",
-        name: "Register",
+        name: "register",
         component: () => import("pages/Register"),
+        meta: {
+          label: "Register",
+        },
       },
       {
         path: "email-confirmation",
-        name: "Email Confirmation",
+        name: "email-confirmation",
         component: () => import("pages/EmailConfirmation"),
+        meta: {
+          label: "Email Confirmation",
+        },
       },
       {
         path: "forgot-password",
-        name: "Forgot Password",
+        name: "forgot-password",
         component: () => import("pages/ForgotPassword"),
+        meta: {
+          label: "Forgot Password",
+        },
       },
       {
         path: "reset-password",
-        name: "Reset Password",
+        name: "reset-password",
         component: () => import("pages/ResetPassword"),
+        meta: {
+          label: "Reset Password",
+        },
       },
     ],
   },
@@ -45,16 +63,29 @@ const routes = [
       requireAuth: true,
     },
     children: [
-      { path: "me", name: "Home", component: () => import("pages/Home") },
+      {
+        path: "me",
+        name: "home",
+        component: () => import("pages/Home"),
+        meta: {
+          label: "Home",
+        },
+      },
       {
         path: "category",
-        name: "Category",
+        name: "category",
         component: () => import("pages/Category"),
+        meta: {
+          label: "Category",
+        },
       },
       {
         path: "form-category/:id?",
-        name: "Form Category",
+        name: "form-category",
         component: () => import("pages/FormCategory"),
+        meta: {
+          label: "Form Category",
+        },
       },
     ],
   },

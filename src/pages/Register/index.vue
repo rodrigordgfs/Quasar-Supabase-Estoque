@@ -78,7 +78,7 @@ export default defineComponent({
         await register(form.value);
         notifySuccess("Your account has been created");
         router.push({
-          name: "Email Confirmation",
+          name: "email-confirmation",
           query: { email: form.value.email },
         });
       } catch (error) {
