@@ -46,9 +46,9 @@
 
 <script>
 import { defineComponent, ref, onMounted } from "vue";
-import useNotify from "src/composables/useNotify";
-import useLoading from "src/composables/useLoading";
-import useAPI from "src/composables/useAPI";
+import useNotify from "../../composables/useNotify";
+import useLoading from "../../composables/useLoading";
+import useAPI from "../../composables/useAPI";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
 

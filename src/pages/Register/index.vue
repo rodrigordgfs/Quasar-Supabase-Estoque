@@ -52,10 +52,10 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import useAuthUser from "src/composables/useAuthUser";
+import useAuthUser from "../../composables/useAuthUser";
 import { useRouter } from "vue-router";
-import useNotify from "src/composables/useNotify";
-import useLoading from "src/composables/useLoading";
+import useNotify from "../../composables/useNotify";
+import useLoading from "../../composables/useLoading";
 
 export default defineComponent({
   name: "PageRegister",

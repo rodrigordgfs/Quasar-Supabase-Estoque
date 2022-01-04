@@ -1,4 +1,4 @@
-import useSupabase from "src/boot/supabase";
+import useSupabase from "../boot/supabase";
 import useAuthUser from "./useAuthUser";
 
 export default function useAPI() {
