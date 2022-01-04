@@ -29,7 +29,12 @@
             >
               <q-tooltip> Edit </q-tooltip>
             </q-btn>
-            <q-btn icon="delete" color="negative" dense>
+            <q-btn
+              icon="delete"
+              color="negative"
+              @click="handleRemove(props.row.id)"
+              dense
+            >
               <q-tooltip> Delete </q-tooltip>
             </q-btn>
           </q-td>
@@ -42,8 +47,10 @@
 <script>
 import { defineComponent, ref, onMounted } from "vue";
 import useNotify from "src/composables/useNotify";
+import useLoading from "src/composables/useLoading";
 import useAPI from "src/composables/useAPI";
 import { useRouter } from "vue-router";
+import { useQuasar } from "quasar";
 
 export default defineComponent({
   name: "PageCategory",
@@ -66,14 +73,17 @@ export default defineComponent({
         field: "actions",
       },
     ];
-    const { get } = useAPI();
-    const { notifyNegative } = useNotify();
+    const { get, remove } = useAPI();
+    const { notifyNegative, notifySuccess } = useNotify();
+    const { showLoading, hideLoading } = useLoading();
+    const $q = useQuasar();
     const loading = ref(true);
+    const table = "category";
 
     const handleGetCategories = async () => {
       loading.value = true;
       try {
-        categories.value = await get("category");
+        categories.value = await get(table);
       } catch (error) {
         notifyNegative(error.message);
       } finally {
@@ -81,17 +91,38 @@ export default defineComponent({
       }
     };
 
-    const handleEdit = (category) => {
+    const handleEdit = (category) =>
       router.push({ name: "form-category", params: { id: category.id } });
+
+    const handleAdd = () => router.push({ name: "form-category" });
+
+    const handleRemove = async (id) => {
+      try {
+        $q.dialog({
+          title: "Delete Category",
+          message: "Are you sure you want to delete this category?",
+          persistent: true,
+          cancel: true,
+        }).onOk(async () => {
+          try {
+            showLoading("Deleting category...");
+            await remove(table, id);
+            notifySuccess("Category deleted successfully");
+            handleGetCategories();
+          } catch (error) {
+            notifyNegative(error.message);
+          } finally {
+            hideLoading();
+          }
+        });
+      } catch (error) {
+        notifyNegative(error.message);
+      } finally {
+        hideLoading();
+      }
     };
 
-    const handleAdd = () => {
-      router.push({ name: "form-category" });
-    };
-
-    onMounted(() => {
-      handleGetCategories();
-    });
+    onMounted(() => handleGetCategories());
 
     return {
       categories,
@@ -99,6 +130,7 @@ export default defineComponent({
       loading,
       handleEdit,
       handleAdd,
+      handleRemove,
     };
   },
 });
